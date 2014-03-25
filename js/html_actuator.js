@@ -57,24 +57,25 @@ HTMLActuator.prototype.addTile = function (tile) {
   // We can't use classlist because it somehow glitches when replacing classes
   var classes = ["tile", "tile-" + tile.value, positionClass];
 
-  if (tile.value > 2048) classes.push("tile-super");
+  if (tile.value > 8192) classes.push("tile-super");
 
   this.applyClasses(wrapper, classes);
 
   var outputtext = new Array();
   outputtext[0] = "";
-  outputtext[1] = "electron";
-  outputtext[2] = "electron neutrino";
-  outputtext[3] = "muon";
-  outputtext[4] = "muon neutrino";
-  outputtext[5] = "tau";
-  outputtext[6] = "tau neutrino";
-  outputtext[7] = "gluon";
-  outputtext[8] = "photon";
-  outputtext[9] = "Z boson";
-  outputtext[10] = "W boson";
-  outputtext[11] = "Higgs Boson";
-
+  outputtext[1] = Math.random() < 0.5 ? "Machine Code" : "Assembly";
+  outputtext[2] = Math.random() < 0.5 ? "FORTRAN" : "Simula";
+  outputtext[3] = Math.random() < 0.5 ? "BCPL" : "ALGOL";
+  outputtext[4] = Math.random() < 0.5 ? "Smalltalk" : "C";
+  outputtext[5] = Math.random() < 0.5 ? "BASIC" : "Pascal";
+  outputtext[6] = Math.random() < 0.5 ? "C++" : "Objective-C";
+  outputtext[7] = Math.random() < 0.5 ? "Java" : "Perl";
+  outputtext[8] = Math.random() < 0.5 ? "C#" : "PHP";
+  outputtext[9] = Math.random() < 0.5 ? "F#" : "Scala";
+  outputtext[10] = Math.random() < 0.5 ? "JavaScript" : "Dart";
+  outputtext[11] = Math.random() < 0.5 ? "Ruby" : "Python";
+  outputtext[12] = Math.random() < 0.5 ? "Hack" : "Go";
+  outputtext[13] = "Brainfuck";
 
   inner.classList.add("tile-inner");
   inner.textContent = outputtext[(Math.log(tile.value) / Math.LN2)] || '';
@@ -124,7 +125,7 @@ HTMLActuator.prototype.updateScore = function (score) {
   var difference = score - this.score;
   this.score = score;
 
-  this.scoreContainer.textContent = this.score + " GeV";
+  this.scoreContainer.innerHTML = this.score + " <abbr title=\"lines of code\">LoC</abbr>";
 
   if (difference > 0) {
     var addition = document.createElement("div");
@@ -136,12 +137,12 @@ HTMLActuator.prototype.updateScore = function (score) {
 };
 
 HTMLActuator.prototype.updateBestScore = function (bestScore) {
-  this.bestContainer.textContent = bestScore + " GeV";
+  this.bestContainer.innerHTML = bestScore + " <abbr title=\"lines of code\">LoC</abbr>";
 };
 
 HTMLActuator.prototype.message = function (won) {
   var type    = won ? "game-won" : "game-over";
-  var message = won ? "You'll get a Nobel Prize!" : "Er... LHC breaks down......";
+  var message = won ? "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++." : "Game over! Keep trying...";
 
   this.messageContainer.classList.add(type);
   this.messageContainer.getElementsByTagName("p")[0].textContent = message;
